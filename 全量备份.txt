@@ -1,0 +1,26 @@
+#!/bin/bash
+#mysql数据备份
+user=root
+password=1qaz2WSX#
+database1=lol1
+database2=lol2
+backup_dir=/tmp/backup/database/   #备份数据库文件的路径
+logfile=/tmp/backup/database/data_backup.log  #备份数据库脚本的日志文件
+date=`date +%Y%m%d`             #时间为当前系统时间
+dumpfile1=$date-lol1.sql
+dumpfile2=$date-lol2.sql  #需要备份的数据库名称
+archive1=$dumpfile1-tar.gz
+archive2=$dumpfile2-tar.gz
+ls $backup_dir
+if [ $? -ne 0 ] ;then  #判断备份路径是否存在，若不存在创建该创径
+mkdir -p "$backup_dir"
+fi
+cd $backup_dir  #跳到备份目录下
+mysqldump -$user -p$password  $database1 > $dumpfile1
+#使用mysqldump备份数据库
+if [[ $? == 0  ]] ;then
+tar czvf  $archive1 $dumpfile1 >> $logfile  2>&1
+echo "$archlve1 backup successful" >> $logfile
+else
+echo "$archive1 bacaup fail!"  >>  $logfile
+fi

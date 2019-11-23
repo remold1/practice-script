@@ -1,0 +1,12 @@
+#!/bin/bash
+#批量进行ip的判断，测试通的IP和不通的IP，以供使用
+for i in $(cat /tmp/ip.txt)
+
+do
+ping -c1 $i &>/dev/null
+if [ $? = 0 ];then
+        echo $i >>yes.txt
+else
+        echo $i >>no.txt
+fi
+done

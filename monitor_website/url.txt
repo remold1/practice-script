@@ -1,0 +1,8 @@
+# [China] localtion website.
+www.baidu.com
+www.zhihu.cn
+www.qingcloud.com
+
+# [USA] localtion website.
+www.google.com
+www.facebook.com

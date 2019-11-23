@@ -1,0 +1,65 @@
+#/usr/bin/bash
+#user=guo
+#by 20191113
+
+#配置bond配置文件
+echo "开始配置bond0"
+sleep 2
+echo "TYPE=Ethernet
+     DEVICE=bond0
+     NM_CONTROLLED=NO
+     ONBOOT=yes
+     BOOTPROTO=none
+     IPADDR=192.168.17.144
+     PREFIX=24
+     IPV6INIT=NO
+     USERCTL=NO
+     GATEWAY=192.168.17.2
+     DNS1=8.8.8.8"   >/etc/sysconfig/network-scripts/ifcfg-bond0
+
+echo "配置完bond0"
+
+
+#配置ens33
+echo "开始配置ens33"
+sleep 2
+
+echo "TYPE=Ethernet
+      BOOTPROTO=none
+      NAME=ens33
+      DEVICE=ens33
+      ONBOOT=yes
+      NM_CONTROLLED=NO
+      MASTER=bond0
+      SLAVE=yes
+      IPV6INIT=NO
+      USERCTL=NO"  >/etc/sysconfig/network-scripts/ifcfg-ens33
+
+echo "配置完ens33"
+
+
+#配置ens37
+echo "开始配置ens37"
+sleep 2
+
+echo "TYPE=Ethernet
+      BOOTPROTO=none
+      NAME=ens37
+      DEVICE=ens37
+      ONBOOT=yes
+      NM_CONTROLLED=NO
+      MASTER=bond0
+      SLAVE=yes
+      IPV6INIT=NO
+      USERCTL=NO"  >/etc/sysconfig/network-scripts/ifcfg-ens37
+
+echo "配置完ens37"
+
+#轮询规则
+sleep 2
+echo "alias bond0 bonding
+          options bonding mode=0 miimon=100"  >/etc/modprobe.d/bond.conf
+
+systemctl restart network
+sleep 2
+echo "======over======="
