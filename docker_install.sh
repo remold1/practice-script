@@ -26,6 +26,8 @@ accelerate() {
 		"registry-mirrors": ["https://mb8n4btz.mirror.aliyuncs.com"]
 	}   
 	EOF
+        sudo systemctl daemon-reload
+	sudo systemctl restart docker
 }
 
 #Detect kernel version
