@@ -33,6 +33,8 @@ accelerate() {
 #Detect kernel version
 a=`uname -a | awk '{print $3}' | awk -F. '{print $1}'`
 b=`uname -a | awk '{print $3}' | awk -F. '{print $2}'`
+c=`find / -name "$0"`
+chmod +x $c
 if [ $a -ge 3 -a $b -ge 10 ];then
 	echo "Ready to install..."
 	delete  
